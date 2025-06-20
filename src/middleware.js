@@ -6,7 +6,7 @@ export function middleware(request) {
 
   if (request.nextUrl.pathname.startsWith('/admin')) {
     if (role !== 'admin') {
-      return NextResponse.redirect(new URL('/unauthorized', request.url));
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
 

@@ -24,7 +24,6 @@ export default function PermissionsPage() {
                 body: JSON.stringify({ name: userName, role: userRole }),
             });
             const data = await res.json();
-            console.log({data})
             if (!res.ok) {
                 toast.error(data?.error);
             } else {

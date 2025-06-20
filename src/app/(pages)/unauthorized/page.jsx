@@ -1,7 +1,5 @@
-// app/unauthorized/page.tsx (or wherever your page file is)
-
-import Link from 'next/link'
 import React from 'react'
+import Link from 'next/link'
 
 const UnauthorizedPage = () => {
     return (

@@ -1,4 +1,3 @@
-// app/api/users/[id]/role/route.js
 import dbConnect from '../../../../lib/mongoose';
 import User from '../../../../models/User';
 
@@ -26,6 +25,7 @@ export async function POST(request, context) {
   }
 
   user.role = role;
+  user.action = 'role changed';
   await user.save();
 
   return new Response(
