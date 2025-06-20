@@ -2,7 +2,7 @@ import React from 'react'
 
 const AddUser = ({ handleForm, userName, setUserName, userRole, setUserRole }) => {
     return (
-        <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 max-w-md mx-auto mt-10">
+        <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 max-w-md mx-auto w-full">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Add User</h1>
             <form onSubmit={handleForm} className="space-y-4">
                 <div>

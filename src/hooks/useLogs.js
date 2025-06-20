@@ -44,7 +44,6 @@ const filteredLogs = useMemo(() => {
 
   const filterOptions = useMemo(() => {
     const roles = [...new Set(logs.map(log => log.role))];
-    console.log({roles})
     return roles;
   }, [logs]);
 

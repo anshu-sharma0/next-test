@@ -1,4 +1,3 @@
-// /hooks/useFetch.js
 import { useState, useEffect } from 'react';
 import { fetchApi } from '../app/lib/fetchApi';
 

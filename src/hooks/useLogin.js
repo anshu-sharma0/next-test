@@ -16,19 +16,27 @@ export const useLogin = () => {
 
     try {
       const data = await loginUser(name);
-      console.log({ data })
-      if (data?.status === 200)
-        if (data?.data?.role === 'admin') {
-          document.cookie = `role=${data.data.role}; path=/`;
-          document.cookie = `name=${data.data.name}; path=/`;
+      if (data?.status === 200) {
+        const userRole = data?.data?.role;
+        const userName = data?.data?.name;
+
+        if (userRole) {
+          document.cookie = `role=${userRole}; path=/`;
+          document.cookie = `name=${userName}; path=/`;
+
           toast.success(data.message);
-          router.push('/admin/permissions');
+
+          if (userRole.toLowerCase() === 'admin') {
+            router.push('/admin/permissions');
+          } else {
+            router.push('/logs');
+          }
         } else {
-          toast.success(data.message);
+          toast.error('No role found. Redirecting to logs.');
           router.push('/logs');
         }
-      else {
-        toast.error(data.message);
+      } else {
+        toast.error(data?.message || 'Login failed');
       }
     } catch (error) {
       toast.error(error.message || 'Failed to login');

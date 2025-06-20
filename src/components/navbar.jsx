@@ -19,6 +19,11 @@ const Navbar = () => {
     }
   };
 
+  const isAdmin = () => {
+    const role = request.cookies.get('role')?.value;
+    return role === 'admin';
+  };
+
   return (
     <nav className="bg-white shadow-md px-6 py-3 flex items-center justify-between">
       <div className="text-xl font-semibold text-gray-800">
@@ -26,7 +31,7 @@ const Navbar = () => {
       </div>
 
       {pathname !== '/login' && <div className="flex items-center space-x-6">
-        <Link href="/logs" className={`hover:text-blue-600 transition-colors ${pathname === '/logs' ? "text-blue-500" : "text-gray-700"}`}>
+        <Link href="/logs" className={`hover:text-blue-600 transition-colors ${isAdmin ? "" : "hidden"} ${pathname === '/logs' ? "text-blue-500" : "text-gray-700"}`}>
           Logs
         </Link>
         <Link href="/admin/permissions" className={`hover:text-blue-600 transition-colors ${pathname === '/admin/permissions' ? "text-blue-500" : "text-gray-700"}`}>
