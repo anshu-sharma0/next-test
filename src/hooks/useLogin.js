@@ -16,14 +16,19 @@ export const useLogin = () => {
 
     try {
       const data = await loginUser(name);
-
-      if (data.data.role === 'admin') {
-        document.cookie = `role=${data.data.role}; path=/`;
-        document.cookie = `name=${data.data.name}; path=/`;
-        toast.success(data.message);
-        router.push('/admin/logs');
-      } else {
-        toast.error('You are not an admin');
+      console.log({ data })
+      if (data?.status === 200)
+        if (data?.data?.role === 'admin') {
+          document.cookie = `role=${data.data.role}; path=/`;
+          document.cookie = `name=${data.data.name}; path=/`;
+          toast.success(data.message);
+          router.push('/admin/permissions');
+        } else {
+          toast.success(data.message);
+          router.push('/logs');
+        }
+      else {
+        toast.error(data.message);
       }
     } catch (error) {
       toast.error(error.message || 'Failed to login');

@@ -1,7 +1,7 @@
 'use client';
-import Loader from '../../../../components/Loader';
-import { FilterLog, LogTable, Pagination } from '../../../../components/component';
-import { usePaginatedLogs } from '../../../../hooks/usePaginatedLogs';
+import Loader from '../../../components/Loader';
+import { FilterLog, LogTable, Pagination } from '../../../components/component';
+import { usePaginatedLogs } from '../../../hooks/useLogs';
 
 export default function AuditLogsPage() {
   const {
@@ -19,7 +19,7 @@ export default function AuditLogsPage() {
   if (loading) return <Loader />;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-[calc(100vh-64px)] bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         <FilterLog roleFilter={roleFilter} handleRoleFilterChange={handleRoleFilterChange} filterOptions={filterOptions} paginatedData={paginatedData} />
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">

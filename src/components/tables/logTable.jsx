@@ -1,5 +1,6 @@
 import React from 'react'
 import formatTimestamp from '../../utils/timeStamp'
+import getRoleBadgeColor from '../../utils/roleBadgeColor'
 const LogTable = ({ paginatedData }) => {
     return (
         <table className="min-w-full divide-y divide-gray-200">
@@ -34,7 +35,7 @@ const LogTable = ({ paginatedData }) => {
                             </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800`}>
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getRoleBadgeColor(log.role)}`}>
                                 {log.role}
                             </span>
                         </td>

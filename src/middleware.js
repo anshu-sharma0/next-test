@@ -8,6 +8,8 @@ export function middleware(request) {
     if (role !== 'admin') {
       return NextResponse.redirect(new URL('/login', request.url));
     }
+  } else if (request.nextUrl.pathname === '/') {
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   return NextResponse.next();

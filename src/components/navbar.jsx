@@ -26,11 +26,14 @@ const Navbar = () => {
       </div>
 
       {pathname !== '/login' && <div className="flex items-center space-x-6">
-        <Link href="/admin/logs" className={`hover:text-blue-600 transition-colors ${pathname === '/admin/logs' ? "text-blue-500" : "text-gray-700"}`}>
+        <Link href="/logs" className={`hover:text-blue-600 transition-colors ${pathname === '/logs' ? "text-blue-500" : "text-gray-700"}`}>
           Logs
         </Link>
         <Link href="/admin/permissions" className={`hover:text-blue-600 transition-colors ${pathname === '/admin/permissions' ? "text-blue-500" : "text-gray-700"}`}>
           Permissions
+        </Link>
+        <Link href="/admin/addUser" className={`hover:text-blue-600 transition-colors ${pathname === '/admin/addUser' ? "text-blue-500" : "text-gray-700"}`}>
+          Add User
         </Link>
         <button
           onClick={handleLogout}

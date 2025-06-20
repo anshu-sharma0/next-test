@@ -16,7 +16,7 @@ export async function POST(req) {
 
     const userName = await User.findOne({ name });
     if (userName) {
-      return new Response(JSON.stringify({ error: 'User already exists' }), {
+      return new Response(JSON.stringify({ error: 'User already exists', status: 400 }), {
         status: 400,
       });
     }
@@ -32,7 +32,7 @@ export async function POST(req) {
 
     await user.save();
 
-    return new Response(JSON.stringify({ message: 'User added successfully', id: nextId }), {
+    return new Response(JSON.stringify({ message: 'User added successfully', id: nextId, status: 200 }), {
       status: 200,
     });
   } catch (error) {

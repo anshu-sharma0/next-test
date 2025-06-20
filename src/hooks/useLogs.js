@@ -27,9 +27,10 @@ export const usePaginatedLogs = () => {
 
   useEffect(() => setPage(1), [roleFilter]);
 
-  const filteredLogs = useMemo(() => {
-    return logs.filter(log => roleFilter === 'All' || log.role === roleFilter);
-  }, [logs, roleFilter]);
+const filteredLogs = useMemo(() => {
+  return logs.filter(log => roleFilter === 'All' || log.role === roleFilter);
+}, [logs, roleFilter]);
+
 
   const paginatedData = useMemo(() => {
     const start = (page - 1) * pageSize;
@@ -43,7 +44,8 @@ export const usePaginatedLogs = () => {
 
   const filterOptions = useMemo(() => {
     const roles = [...new Set(logs.map(log => log.role))];
-    return { roles };
+    console.log({roles})
+    return roles;
   }, [logs]);
 
   const goToNextPage = useCallback(() => {
