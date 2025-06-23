@@ -1,44 +1,40 @@
 import dbConnect from '../../../lib/mongoose';
 import User from '../../../models/User';
+import bcrypt from 'bcryptjs';
 
 export async function POST(req) {
   try {
     await dbConnect();
 
-    const body = await req.json();
-    const { name, role } = body;
+    const { name, email, role, password } = await req.json();
 
-    if (!name || !role) {
-      return new Response(JSON.stringify({ error: 'Name and role are required' }), {
+    if (!name || !email || !role || !password) {
+      return new Response(JSON.stringify({ error: 'Name, role, and password are required' }), {
         status: 400,
       });
     }
 
-    const userName = await User.findOne({ name });
-    if (userName) {
-      return new Response(JSON.stringify({ error: 'User already exists', status: 400 }), {
-        status: 400,
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return new Response(JSON.stringify({ error: 'User already exists' }), {
+        status: 409,
       });
     }
 
-    const users = await User.find();
-    const nextId = users.length + 1
-
-    const user = new User({
-      id: nextId,
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({
       name,
       role,
+      email,
+      password: hashedPassword,
     });
 
-    await user.save();
-
-    return new Response(JSON.stringify({ message: 'User added successfully', id: nextId, status: 200 }), {
-      status: 200,
-    });
-  } catch (error) {
-    console.error('Error adding user:', error);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ message: 'User added successfully', status: 200, data: user }),
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error('Error creating user:', err);
+    return new Response(JSON.stringify({ error: 'Server error' }), { status: 500 });
   }
 }

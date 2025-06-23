@@ -14,32 +14,29 @@ export const useLogin = () => {
     e.preventDefault();
     setLoading(true);
 
+    if (!email || !password) {
+      toast.error('All fields are required');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const data = await loginUser(name);
+      const data = await loginUser(email, password);
+
       if (data?.status === 200) {
-        const userRole = data?.data?.role;
-        const userName = data?.data?.name;
+        toast.success('Login successful');
 
-        if (userRole) {
-          document.cookie = `role=${userRole}; path=/`;
-          document.cookie = `name=${userName}; path=/`;
-
-          toast.success(data.message);
-
-          if (userRole.toLowerCase() === 'admin') {
-            router.push('/admin/permissions');
-          } else {
-            router.push('/logs');
-          }
+        const role = data?.data?.role?.toLowerCase();
+        if (role === 'admin') {
+          router.push('/admin/permissions');
         } else {
-          toast.error('No role found. Redirecting to logs.');
           router.push('/logs');
         }
       } else {
         toast.error(data?.message || 'Login failed');
       }
     } catch (error) {
-      toast.error(error.message || 'Failed to login');
+      toast.error(error.message || 'Login error');
       console.error('Login error:', error);
     } finally {
       setLoading(false);
