@@ -7,7 +7,7 @@ export const usePaginatedLogs = () => {
   const [roleFilter, setRoleFilter] = useState('All');
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const pageSize = 5;
+  const pageSize = 7;
 
   useEffect(() => {
     const loadLogs = async () => {
