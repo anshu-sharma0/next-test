@@ -16,7 +16,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     const email = getCookieValue('email')
 
-    const response = await fetch('/api/logout', {
+    const response = await fetch('/api/auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

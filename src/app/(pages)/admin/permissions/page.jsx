@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import { FilterLog, Loader, UserTable } from '../../../../components/component';
+import { FilterLog, Loader, UserTable } from '../../../../components/layout';
 import useFetch from '../../../../hooks/useFetch';
 import { fetchUsersByRole } from '../../../../services/fetchLogs';
 import { updateUserRole } from '../../../../services/userService';

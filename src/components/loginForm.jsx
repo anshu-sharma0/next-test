@@ -8,7 +8,6 @@ const LoginForm = ({ loading }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-
     const router = useRouter();
 
     const validate = () => {
@@ -25,18 +24,25 @@ const LoginForm = ({ loading }) => {
             setErrors(validationErrors);
             return;
         }
-
-        const res = await signIn('credentials', {
-            redirect: false,
-            email,
-            password
-        });
-
-        if (res?.error) {
-            toast.error(res.error);
-        } else {
-            toast.success("Login successful!");
-            router.push('/logs');
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                toast.success('Login successful!');
+                router.push('/logs');
+            } else {
+                toast.error(data.message || 'Login failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            toast.error('Login failed. Please try again.');
+            return;
         }
     };
 

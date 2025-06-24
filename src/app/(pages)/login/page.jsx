@@ -1,6 +1,6 @@
 'use client'
 
-import { LoginForm } from '../../../components/component';
+import { LoginForm } from '../../../components/layout';
 import { useLogin } from '../../../hooks/useLogin';
 
 export default function Login() {

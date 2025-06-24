@@ -1,6 +1,6 @@
 'use client';
 import Loader from '../../../components/Loader';
-import { FilterLog, LogTable, Pagination } from '../../../components/component';
+import { FilterLog, LogTable, Pagination } from '../../../components/layout';
 import { usePaginatedLogs } from '../../../hooks/useLogs';
 
 export default function AuditLogsPage() {
