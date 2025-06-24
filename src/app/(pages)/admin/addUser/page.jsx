@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { toast } from 'react-hot-toast';
-import { AddUser } from '../../../../components/layout';
+import AddUser from './addUser'
 import { addUser } from '../../../../services/userService';
 
 const Page = () => {
