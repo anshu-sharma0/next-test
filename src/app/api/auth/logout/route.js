@@ -2,10 +2,12 @@ import dbConnect from '../../../lib/mongoose';
 import User from '../../../models/User';
 
 export async function POST(req) {
+  const email = req.cookies.get('email')?.value
+  
   try {
     await dbConnect();
 
-    const { email } = await req.json();
+    // const { email } = await req.json();
     const user = await User.findOne({ email });
 
     if (!user) {

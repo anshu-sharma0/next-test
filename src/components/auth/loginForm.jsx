@@ -34,8 +34,8 @@ const LoginForm = ({ loading }) => {
             });
             const data = await res.json();
             if (res.ok) {
-                toast.success('Login successful!');
                 router.push('/logs');
+                toast.success('Login successful!');
             } else {
                 toast.error(data.message || 'Login failed. Please try again.');
             }
@@ -78,6 +78,13 @@ const LoginForm = ({ loading }) => {
                 className={`w-full py-3 rounded-md cursor-pointer text-white font-semibold ${loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
             >
                 {loading ? 'Signing In...' : 'Sign In'}
+            </button>
+            <button
+                type="button"
+                onClick={() => signIn('google', { callbackUrl: '/logs' })}
+                className="w-full py-3 rounded-md cursor-pointer text-white font-semibold bg-red-600 hover:bg-red-700"
+            >
+                Sign in with Google
             </button>
         </form>
     );

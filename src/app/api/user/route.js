@@ -13,7 +13,11 @@ export async function GET() {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    return new Response(JSON.stringify({ role: decoded.role }), {
+    return new Response(JSON.stringify({
+      role: decoded.role,
+      email: decoded.email,
+      name: decoded.name
+    }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     })
