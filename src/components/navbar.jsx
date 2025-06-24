@@ -55,15 +55,27 @@ const Navbar = () => {
 
       {pathname !== '/login' && (
         <div className="flex items-center space-x-6">
-          <Link href="/logs" className={`hover:text-blue-600 transition-colors ${pathname === '/logs' ? "text-blue-500" : "text-gray-700"}`}>
+          <Link
+            href="/logs"
+            className={`hover:text-blue-700 transition-colors ${pathname === '/logs' ? "text-blue-700" : "text-gray-800"}`}
+          >
             Logs
           </Link>
-          <Link href="/admin/permissions" className={`hover:text-blue-600 transition-colors ${role !== 'viewer' ? "" : "hidden"} ${pathname === '/admin/permissions' ? "text-blue-500" : "text-gray-700"}`}>
+
+          <Link
+            href="/admin/permissions"
+            className={`hover:text-blue-700 transition-colors ${role !== 'viewer' ? "" : "hidden"} ${pathname === '/admin/permissions' ? "text-blue-700" : "text-gray-800"}`}
+          >
             Permissions
           </Link>
-          <Link href="/admin/addUser" className={`hover:text-blue-600 transition-colors ${role === 'admin' ? "" : "hidden"} ${pathname === '/admin/addUser' ? "text-blue-500" : "text-gray-700"}`}>
+
+          <Link
+            href="/admin/addUser"
+            className={`hover:text-blue-700 transition-colors ${role === 'admin' ? "" : "hidden"} ${pathname === '/admin/addUser' ? "text-blue-700" : "text-gray-800"}`}
+          >
             Add User
           </Link>
+
           <button
             onClick={handleLogout}
             className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition-colors cursor-pointer"

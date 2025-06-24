@@ -6,8 +6,10 @@ const FilterLog = ({ roleFilter, handleRoleFilterChange, filterOptions = [], pag
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="relative w-full md:w-1/2">
+                    <label htmlFor="role-filter" className="sr-only">Filter by role</label>
                     <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <select
+                        id="role-filter"
                         value={roleFilter}
                         onChange={handleRoleFilterChange}
                         className="appearance-none cursor-pointer w-full pl-10 pr-6 py-2 border border-gray-300 rounded-lg bg-white"
