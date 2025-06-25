@@ -19,19 +19,3 @@ export const fetchUsersByRole = async (role) => {
     throw error;
   }
 }
-
-export const fetchAllUsers = async () => {
-  try {
-    const res = await fetch ('/api/users');
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message || 'Failed to fetch users');
-    }
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    throw error;
-  }
-}
-

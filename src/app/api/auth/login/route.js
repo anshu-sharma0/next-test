@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/mongoose';
-import User from '../../../models/User';
+import AuditLog from '../../../models/AuditLog';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -15,7 +15,7 @@ export async function POST(req) {
             });
         }
 
-        const user = await User.findOne({ email });
+        const user = await AuditLog.findOne({ email });
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return new Response(JSON.stringify({ message: 'Invalid email or password' }), {

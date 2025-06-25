@@ -1,5 +1,5 @@
 import dbConnect from '../../../../lib/mongoose';
-import User from '../../../../models/User';
+import AuditLog from '../../../../models/AuditLog';
 
 export async function POST(request, context) {
   const currentUser = { role: 'admin' };
@@ -18,7 +18,7 @@ export async function POST(request, context) {
   await dbConnect();
 
   const params = await context.params;
-  const user = await User.findOne({ id: params.id });
+  const user = await AuditLog.findOne({ _id: params.id });
 
   if (!user) {
     return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
@@ -29,7 +29,7 @@ export async function POST(request, context) {
   await user.save();
 
   return new Response(
-    JSON.stringify({ message: 'Role updated', user }),
+    JSON.stringify({ message: 'Role updated', user, status: 200 }),
     { status: 200 }
   );
 }

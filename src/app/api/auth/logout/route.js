@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/mongoose';
-import User from '../../../models/User';
+import AuditLog from '../../../models/AuditLog';
 
 export async function POST(req) {
   const email = req.cookies.get('email')?.value
@@ -8,7 +8,7 @@ export async function POST(req) {
     await dbConnect();
 
     // const { email } = await req.json();
-    const user = await User.findOne({ email });
+    const user = await AuditLog.findOne({ email });
 
     if (!user) {
       return new Response(JSON.stringify({ message: 'Invalid user', status: 403 }), {

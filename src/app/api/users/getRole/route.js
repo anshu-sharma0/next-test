@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/mongoose';
-import User from '../../../models/User';
+import AuditLog from '../../../models/AuditLog';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -11,9 +11,9 @@ export async function GET(request) {
     let users;
 
     if (role) {
-      users = await User.find({ role }).lean();
+      users = await AuditLog.find({ role }).lean();
     } else {
-      users = await User.find().lean();
+      users = await AuditLog.find().lean();
     }
 
     return new Response(JSON.stringify(users), {

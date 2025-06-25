@@ -15,8 +15,8 @@ const FilterLog = ({ roleFilter, handleRoleFilterChange, filterOptions = [], pag
                         className="appearance-none cursor-pointer w-full pl-10 pr-6 py-2 border border-gray-300 rounded-lg bg-white"
                     >
                         <option value="All">All Roles</option>
-                        {filterOptions.map((role) => (
-                            <option key={role} value={role}>{role}</option>
+                        {['admin', 'editor', 'viewer'].map((role) => (
+                            <option key={role} value={role}>{role.charAt(0).toUpperCase() + role.slice(1)}</option>
                         ))}
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">

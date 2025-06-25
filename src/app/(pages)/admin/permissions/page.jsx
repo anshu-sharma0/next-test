@@ -46,11 +46,21 @@ export default function PermissionsPage() {
     const updateRole = async (id, newRole) => {
         try {
             await updateUserRole(id, newRole);
-            setUsers(users.map((user) => (user.id === id ? { ...user, role: newRole } : user)));
+
+            const updatedUsers = users.map((user) =>
+                user._id === id ? { ...user, role: newRole } : user
+            );
+            setUsers(updatedUsers);
+
+            const updatedAdminUsers = updatedUsers.filter((user) =>
+                role === 'All' ? true : user.role === role
+            );
+            setAdminUsers(updatedAdminUsers);
+
             toast.success('Role updated successfully');
         } catch (error) {
             console.error('Error updating user role:', error);
-            toast.error(error.message);
+            toast.error(error.message || 'Failed to update role');
         }
     };
 
@@ -69,15 +79,12 @@ export default function PermissionsPage() {
                 />
 
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-8">
-                    {loading ? (
-                        <Loader />
-                    ) : (
-                        <UserTable
-                            users={adminUsers}
-                            getRoleBadgeColor={getRoleBadgeColor}
-                            updateRole={updateRole}
-                        />
-                    )}
+                    <UserTable
+                        users={adminUsers}
+                        getRoleBadgeColor={getRoleBadgeColor}
+                        updateRole={updateRole}
+                        loading={loading}
+                    />
                 </div>
             </div>
         </div>

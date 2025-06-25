@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 import { useSession, signOut } from 'next-auth/react';
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -27,8 +28,7 @@ const Navbar = () => {
         });
 
         if (!response.ok) {
-          const data = await response.json();
-          console.error('Logout error:', data?.message || 'Unknown error');
+          toast.error('Failed to logout. Please try again.');
           return;
         }
 
@@ -72,7 +72,7 @@ const Navbar = () => {
           role: data.role
         }))
       } catch (error) {
-        console.error('Error fetching user role:', error)
+        toast.error('Error fetching user role:', error)
       }
     }
     if (!session) {
@@ -111,12 +111,20 @@ const Navbar = () => {
               </Link>
 
               <Link
+                href="/admin/createLogs"
+                className={`hover:text-blue-600 font-medium transition-colors duration-200 ${pathname === '/admin/createLogs' ? "text-blue-600" : "text-gray-800"
+                  }`}
+              >
+                Add Log User
+              </Link>
+
+              {/* <Link
                 href="/admin/addUser"
                 className={`hover:text-blue-600 font-medium transition-colors duration-200 ${pathname === '/admin/addUser' ? "text-blue-600" : "text-gray-800"
                   }`}
               >
                 Add User
-              </Link>
+              </Link> */}
             </>
           )}
 

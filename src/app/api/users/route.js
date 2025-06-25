@@ -1,11 +1,11 @@
 import dbConnect from '../../../app/lib/mongoose';
-import User from '../../../app/models/User';
+import AuditLog from '../../../app/models/AuditLog';
 
 export async function GET() {
   try {
     await dbConnect();
 
-    const users = await User.find().lean();
+    const users = await AuditLog.find().lean();
 
     return new Response(JSON.stringify(users), {
       status: 200,
