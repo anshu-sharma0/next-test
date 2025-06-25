@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/mongoose';
-import AuditLog from '../../../models/AuditLog';
+import AuditLog from '../../../../models/AuditLog';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);

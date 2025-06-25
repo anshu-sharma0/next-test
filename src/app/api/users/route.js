@@ -1,5 +1,5 @@
 import dbConnect from '../../../app/lib/mongoose';
-import AuditLog from '../../../app/models/AuditLog';
+import AuditLog from '../../../models/AuditLog';
 
 export async function GET() {
   try {

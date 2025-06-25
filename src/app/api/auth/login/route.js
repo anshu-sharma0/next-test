@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/mongoose';
-import AuditLog from '../../../models/AuditLog';
+import AuditLog from '../../../../models/AuditLog';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 

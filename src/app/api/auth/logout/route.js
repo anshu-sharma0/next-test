@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/mongoose';
-import AuditLog from '../../../models/AuditLog';
+import AuditLog from '../../../../models/AuditLog';
 
 export async function POST(req) {
   const email = req.cookies.get('email')?.value

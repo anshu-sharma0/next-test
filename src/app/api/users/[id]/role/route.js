@@ -1,5 +1,5 @@
 import dbConnect from '../../../../lib/mongoose';
-import AuditLog from '../../../../models/AuditLog';
+import AuditLog from '../../../../../models/AuditLog';
 
 export async function POST(request, context) {
   const currentUser = { role: 'admin' };
