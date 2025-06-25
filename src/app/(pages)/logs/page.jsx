@@ -1,6 +1,4 @@
 'use client';
-
-import useSWR from 'swr';
 import { useState } from 'react';
 import { FilterLog, LogTable, Pagination } from '../../../components/layout';
 import { fetcher } from '../../../utils/fetcher';

@@ -4,6 +4,7 @@ import getIP from '../../../../utils/getIP';
 import getBrowserMeta from '../../../../utils/getBrowserMeta';
 import LogForm from '../../../../components/form/logForm';
 import toast from 'react-hot-toast';
+import fetchApi from '../../../../lib/fetchApi';
 
 export default function AuditLogsPage() {
     const [formData, setFormData] = useState({
@@ -34,19 +35,9 @@ export default function AuditLogsPage() {
                 ip,
             };
 
-            const res = await fetch('/api/admin/logs', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...formData, meta })
-            });
+            await fetchApi('/api/admin/logs', 'POST', { ...formData, meta });
 
-            const data = await res.json();
-            if (!res.ok) {
-                toast.error(data.error || 'Failed to create log');
-            }
-            else {
-                toast.success('Audit log created successfully!');
-            }
+            toast.success('Audit log created successfully!');
             setFormData({ name: '', email: '', password: '', role: '' });
         } catch (err) {
             toast.error('An error occurred while creating the log');

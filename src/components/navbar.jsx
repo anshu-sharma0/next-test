@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 import { useSession, signOut } from 'next-auth/react';
 import toast from 'react-hot-toast'
+import fetchApi from '../lib/fetchApi'
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -19,18 +20,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       if (!session) {
-        const response = await fetch('/api/auth/logout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({}),
-        });
-
-        if (!response.ok) {
-          toast.error('Failed to logout. Please try again.');
-          return;
-        }
+        await fetchApi('/api/auth/logout', 'POST', {});
 
         document.cookie = "email=; Path=/; Max-Age=0";
         window.location.href = '/login';
@@ -38,7 +28,7 @@ const Navbar = () => {
         signOut({ callbackUrl: '/login' });
       }
     } catch (error) {
-      console.error('An unexpected error occurred during logout:', error);
+      toast.error('An unexpected error occurred during logout');
     }
   };
 
@@ -58,33 +48,34 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
+
   useEffect(() => {
-    if (pathname === '/login') return
+    if (pathname === '/login') return;
 
     const fetchRole = async () => {
       try {
-        const res = await fetch('/api/user')
-        const data = await res.json()
+        const data = await fetchApi('/api/user');
         setUser(prev => ({
           ...prev,
           name: data.name,
           email: data.email,
           role: data.role
-        }))
+        }));
       } catch (error) {
-        toast.error('Error fetching user role:', error)
+        toast.error('Error fetching user role: ' + error.message);
       }
-    }
+    };
+
     if (!session) {
-      fetchRole()
+      fetchRole();
     } else {
       setUser(prev => ({
         ...prev,
         name: session?.user.name,
         email: session?.user.email,
-      }))
+      }));
     }
-  }, [pathname, session])
+  }, [pathname, session]);
 
   return (
     <nav className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">

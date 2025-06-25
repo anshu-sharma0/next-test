@@ -12,7 +12,6 @@ export default async function logAudit({
   try {
     await dbConnect();
     await AuditLog.create({ name, email, password, role, action, meta });
-    console.log(`✅ Audit log saved for ${action}`);
   } catch (err) {
     console.error('❌ Audit logging failed:', err);
   }

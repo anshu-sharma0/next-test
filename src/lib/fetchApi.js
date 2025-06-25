@@ -1,16 +1,23 @@
-export const fetchApi = async (apiEndPoint, options = {}) => {
-  try {
-    const res = await fetch(apiEndPoint, options);
+const fetchApi = async (url, method = 'GET', body = null) => {
+  const options = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message || 'Failed to fetch data');
-    }
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error('API Error:', error);
-    throw error;
+  if (body) {
+    options.body = JSON.stringify(body);
   }
+
+  const res = await fetch(url, options);
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error || 'API Error');
+  }
+
+  return data;
 };
+
+export default fetchApi;
