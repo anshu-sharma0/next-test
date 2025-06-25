@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '../../../lib/mongoose';
+import dbConnect from '../../../../lib/mongoose';
 import AuditLog from '../../../../models/AuditLog';
-import { isAdmin } from '../../../lib/auth';
+import { isAdmin } from '../../../../lib/auth';
 import bcrypt from 'bcryptjs';
 
 export async function GET(request) {

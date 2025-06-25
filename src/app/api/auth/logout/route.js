@@ -1,4 +1,4 @@
-import dbConnect from '../../../lib/mongoose';
+import dbConnect from '../../../../lib/mongoose';
 import AuditLog from '../../../../models/AuditLog';
 
 export async function POST(req) {
@@ -7,7 +7,6 @@ export async function POST(req) {
   try {
     await dbConnect();
 
-    // const { email } = await req.json();
     const user = await AuditLog.findOne({ email });
 
     if (!user) {

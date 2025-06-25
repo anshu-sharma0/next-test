@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { useState } from 'react';
 import { FilterLog, LogTable, Pagination } from '../../../components/layout';
 import { fetcher } from '../../../utils/fetcher';
+import useDataFetcher from '../../../hooks/useDataFetcher';
 
 export default function AuditLogsPage() {
   const [role, setRole] = useState('All');
@@ -13,11 +14,7 @@ export default function AuditLogsPage() {
   const roleParam = role !== 'All' ? `&role=${role}` : '';
   const query = `/api/admin/logs?limit=${limit}&offset=${(page - 1) * limit}${roleParam}`;
 
-  const { data, isLoading } = useSWR(query, fetcher, {
-    refreshInterval: 15000,
-    revalidateOnFocus: true,
-    keepPreviousData: true,
-  });
+  const { data, isLoading } = useDataFetcher(query, fetcher);
 
   const logs = data?.data || [];
   const total = data?.total || 0;

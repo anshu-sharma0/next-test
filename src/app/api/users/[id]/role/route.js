@@ -1,4 +1,4 @@
-import dbConnect from '../../../../lib/mongoose';
+import dbConnect from '../../../../../lib/mongoose';
 import AuditLog from '../../../../../models/AuditLog';
 
 export async function POST(request, context) {
